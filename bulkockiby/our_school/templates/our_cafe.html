@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Кафе{% endblock title %}
+{% block content %}
+
+{% for c in our_cafe %}
+
+<div class="card">
+    <a href="{{c.get_absolute_url}}">
+  <div class="container" style="overflow:hidden">
+    <h2 >{{c.address}}</h2>
+  </div>
+   </a>
+</div>
+
+{% if forloop.counter|divisibleby:2 %}
+
+<br>
+
+{% endif %}
+
+
+
+         {% endfor %}
+{% endblock %}

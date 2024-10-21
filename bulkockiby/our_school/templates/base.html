@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <link rel="icon" href="{% static 'img/icon.ico'%}" type="image/x-icon">
+   <!-- <meta name="viewport" content="height=device-height,width=600,user-scalable=yes"> -->
+<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=2.0"/>
+
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    {% csrf_token %}
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container _container">
+                <a href="{% url 'top' %}" class="header__logo">
+                    <img src="{% static 'img/Logo_top.png' %}" alt="">
+                </a>
+                <div class="search__container _container">
+                    <form action="{% url 'search_results' %}" method="get">
+                        <input id="search" name="q" type="text" placeholder="Поиск...">
+                    </form>
+                </div>
+                <nav class="header__menu menu ">
+                    <ul class="menu__list _container">
+                        <li class="menu__item">
+                            <a href="{% url 'top' %}" class="menu__link">Главная</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="{% url 'cafes' %}" class="menu__link">О Нас</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="{% url 'instructions' %}" class="menu__link">Документы</a>
+                        </li>
+
+                        <li class="menu__item">
+                            <a href="{% url 'account' %}" class="menu__link">{{name}}</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="{% url 'account_logout' %}" class="menu__link">Выход</a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+            </div>
+        </header>
+
+    </div>
+
+
+    <div id = 'otstyp'>
+        {% block content %}
+
+
+        {% endblock %}
+    </div>
+</body>
+</html>

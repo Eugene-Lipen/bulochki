@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="height=device-height,width=600,user-scalable=yes">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+    <title>Title</title>
+</head>
+<body>
+
+
+{% csrf_token %}
+
+<div id = "wrap">
+    <a id = 'first' href="{% url 'top' %}">Главная</a>
+    <a href="{% url 'instructions' %}">Инструкции</a>
+   <img id = "logo" src="{% static 'img/Logo_top.png' %}" alt="logo">
+    <a class = 'account' href="{% url 'account_logout' %}">Выход</a>
+    <a class = 'account' href="{% url 'account' %}">{{name}}</a>
+
+
+</div>
+
+
+
+
+
+<div id = 'otstyp'>
+
+
+{% block content %}
+
+
+{% endblock %}
+
+
+</div>
+
+
+</body>
+</html>

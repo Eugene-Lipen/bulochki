@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    #text{
+    font-size: 18px;
+    margin: 7px 0px;
+    color: #AA4E41;
+
+    }
+    #vopr{
+        font-size: 24px;
+        margin: 7px 0px;
+        color: #AA4E41;
+    }
+    input[type="checkbox"]{
+        accent-color: rgb(64, 199, 129);
+    }
+
+    h2{
+    color: #AA4E41;
+    margin: 7px 0px;
+    }
+
+    #button {
+    border: none;
+          font-size: 17px;
+          font-family: 'Marmelad', 'Arial', sans-serif;
+
+          font-weight: 700;
+          color: white;
+          text-decoration: none;
+          padding: .8em 1em calc(.8em + 3px);
+          border-radius: 3px;
+          background: rgb(64,199,129);
+          box-shadow: 0 -3px rgb(53,167,110) inset;
+          transition: 0.2s;
+    }
+    #button:hover { background: rgb(53, 167, 110); }
+    #button:active {
+          background: rgb(33,147,90);
+          box-shadow: 0 3px rgb(33,147,90) inset;
+    }
+
+</style>
+<h2>{{test_name}}</h2>
+
+    {%for i in quests%}
+
+        {% if i.testing_category_id == test%}
+
+       <p id="vopr">{{i}}</p>
+        {% if i.img != '' %}
+        <img src="{{i.img.url}}" alt="">
+        {%endif%}
+        {%for j in answer%}
+
+        {% if j.question_id == i.id%}
+
+            {%if j.id in people_answer%}
+
+
+
+                {%if  j.right == False%}
+
+                  <p><li id = "text" style="color:red">{{j}} - не правильно</li></p>
+
+                {% elif  j.right == True%}
+                    <p><li id = "text" style="color:green">{{j}} - правильно</li></p>
+                {%endif%}
+
+            {%else%}
+             <p><li id = "text">{{j}}</li></p>
+            {%endif%}
+        {% endif%}
+
+        {%endfor%}
+        {% endif%}
+<br>
+    {%endfor%}
+
+    <!--{%if 1 in people_answer%}
+        <p>1</p>
+    {%endif%}-->
+
+{% endblock %}

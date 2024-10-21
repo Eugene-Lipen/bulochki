@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %}{{test_name}}{% endblock title %}
+{% block content %}
+
+<style>
+    #text{
+    font-size: 18px;
+    margin: 7px 0px;
+    color: #AA4E41;
+
+    }
+    #vopr{
+        font-size: 24px;
+        margin: 7px 0px;
+        color: #AA4E41;
+    }
+    input[type="checkbox"]{
+        accent-color: rgb(64, 199, 129);
+    }
+
+    h2{
+    color: #AA4E41;
+    margin: 7px 0px;
+    }
+
+    #button {
+    border: none;
+          font-size: 17px;
+          font-family: 'Marmelad', 'Arial', sans-serif;
+
+          font-weight: 700;
+          color: white;
+          text-decoration: none;
+          padding: .8em 1em calc(.8em + 3px);
+          border-radius: 3px;
+          background: rgb(64,199,129);
+          box-shadow: 0 -3px rgb(53,167,110) inset;
+          transition: 0.2s;
+    }
+    #button:hover { background: rgb(53, 167, 110); }
+    #button:active {
+          background: rgb(33,147,90);
+          box-shadow: 0 3px rgb(33,147,90) inset;
+    }
+
+
+
+#timer {
+    font-size: 3em;
+    font-weight: 100;
+    color: white;
+    padding: 20px;
+    width: 130px;
+    color: white;
+
+
+    display: inline-block;
+    min-width: 90px;
+    padding: 15px;
+    background: #020b43;
+    border-radius: 10px;
+    border: 2px solid #030d52;
+    margin: 15px;
+}
+
+
+
+
+</style>
+
+
+<script>
+    window.onload = function() {
+document.getElementById('timer').innerHTML =
+  05 + ":" + 00;
+startTimer();
+
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+  if(m<0){button = document.getElementById('button');
+
+// имитируем нажатие на кнопку
+        button.click();}
+
+  document.getElementById('timer').innerHTML =
+    m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
+    }
+</script>
+
+<div><span id="timer"></span></div>
+
+
+<form method="post" action="answer/">
+
+    {% csrf_token %}
+
+<h2>{{test_name}}</h2>
+
+    {%for i in quests%}
+
+        {% if i.testing_category_id == test%}
+
+        <p id="vopr">{{i}}</p>
+        {% if i.img != '' %}
+        <img src="{{i.img.url}}" alt="">
+        {%endif%}
+        {%for j in answer%}
+        {% if j.question_id == i.id%}
+
+        <p id="text"><input type="checkbox"  name="{{i.id}}" value="{{j.id}}"> {{j}}</p>
+
+        {% endif%}
+
+        {%endfor%}
+        {% endif%}
+    <br>
+    {%endfor%}
+
+
+
+    <input id='button' type="submit" value="Ответить" />
+    </form>
+
+
+{% endblock %}

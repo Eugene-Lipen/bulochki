@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+{% for c in card %}
+
+
+
+
+
+
+<div class="responsive-two-column-grid">
+
+
+    <div>
+        <h1 id="zagalovok">{{c.title}}</h1>
+        <p class="text">{{c.recipe|safe}}</p>
+        <p class="text">{{c.cooking|safe}}</p>
+    </div>
+    <div>
+        <a href="#"><img src="{{c.photo.url}}" alt=""></a>
+        <video width="320" height="240" controls>
+         <source src="{{c.video.url}}" type="video/mp4"></video>
+    </div>
+</div>
+
+
+
+{% endfor %}
+
+{% endblock %}

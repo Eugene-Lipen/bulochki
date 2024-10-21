@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{subcategory}}{% endblock title %}
+{% block content %}
+
+ {% for c in product %}
+
+<div class="card">
+    <a href="{{c.get_absolute_url}}">
+  <img src="{{c.photo.url}}" alt="категория" style="width:100% " class="imgcard">
+  <div class="container">
+    <h2 style="overflow:hidden">{{c.title}}</h2>
+  </div>
+   </a>
+</div>
+
+{% if forloop.counter|divisibleby:2 %}
+
+<br>
+
+{% endif %}
+
+         {% endfor %}
+
+{% endblock %}

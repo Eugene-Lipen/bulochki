@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}Личный кабинет{% endblock title %}
+{% block content %}
+<h1 id="account">Личная информация</h1>
+
+ {% for i in user %}
+<style>
+
+#button {
+  font-size: 17px;
+  font-family: 'Marmelad', 'Arial', sans-serif;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: red;
+  box-shadow: 0 -3px rgb(53,167,110) inset;
+  transition: 0.2s;
+
+
+}
+#button:hover { background: rgb(53, 167, 110); }
+#button:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+
+
+
+
+
+
+    .rating-result {
+	width: 450px;
+	margin: 0 0;
+
+}
+.rating-result p {
+display: inline;
+}
+.rating-result span {
+	padding: 0;
+	font-size: 32px;
+	margin: 0 3px;
+	line-height: 1;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+.rating-result > span:before {
+	content: '★';
+}
+.rating-result > span.active {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
+
+</style>
+<div class="user_account">
+
+    <p> Имя: {{i.first_name}}</p>
+    <p> Фамилия: {{i.last_name}}</p>
+    <p> Телефон: {{i.phone}}</p>
+    <p> Телеграм: {{i.telegram}}</p>
+    <p> Дата устройства на работу: {{i.date_job}}</p>
+    <p> Кафе: {{cafe}}</p>
+    <p> Должность: {{position}}</p>
+
+
+
+
+    <div class="rating-result">
+        <br>
+        <p>Рейтинг: </p>
+        {%if i.rating == '1'%}
+	        <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        {%elif i.rating == '2'%}
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        {%elif i.rating == '3'%}
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+        {%elif i.rating == '4'%}
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+        {%elif i.rating == '5'%}
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+        {% endif%}
+
+</div>
+    <br>
+    {%if test != Null%}
+        {% for j in category_test %}
+
+                    <button id="button"><a href="{{j.get_absolute_url}}">{{j.name}}</a></button>
+
+        {% endfor %}
+    {% endif %}
+
+
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
